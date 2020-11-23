@@ -161,16 +161,14 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
 
     //开始采集人脸
     private void faceCollect() {
-//        if (mIsInitSuccess) {
+        if (mIsInitSuccess) {
             if (isActionLive) {
                 Intent intent = new Intent(mContext, FaceLivenessExpActivity.class);
                 activity.startActivity(intent);
             }
-
-
-//        } else {
-//            showToast("初始化中，请稍后");
-//        }
+        } else {
+            showToast("初始化中，请稍后");
+        }
 
     }
 
@@ -228,7 +226,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
         // 应用上下文
         // 申请License取得的APPID
         // assets目录下License文件名
-        FaceSDKManager.getInstance().initialize(mContext, "cafa-face-android",
+        FaceSDKManager.getInstance().initialize(activity, "cafa-face-android",
                 "idl-license.face-android", new IInitCallback() {
                     @Override
                     public void initSuccess() {
@@ -238,6 +236,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
                                 Log.e(TAG, "===> 初始化成功");
                                 mIsInitSuccess = true;
                                 mResult.success(true);
+                                showToast("初始化成功");
                             }
                         });
                     }
@@ -250,6 +249,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
                                 Log.e(TAG, "初始化失败 ===> " + errCode + " " + errMsg);
                                 mIsInitSuccess = false;
                                 mResult.success(false);
+                                showToast("初始化失败");
                             }
                         });
                     }

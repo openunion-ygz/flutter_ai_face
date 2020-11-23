@@ -21,7 +21,7 @@
         android:layout_marginTop="96dp"
         android:layout_centerHorizontal="true">
 
-        <com.baidu.idl.face.platform.ui.widget.CircleImageView
+        <com.opun.flutter.flutter_ai_face.faceplatform_ui.widget.CircleImageView
             android:id="@+id/circle_head"
             android:layout_centerInParent="true"
             android:layout_width="97dp"
