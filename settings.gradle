@@ -1,0 +1,5 @@
+include ':faceplatform-release'
+include ':faceplatform-ui'
+include ':faceplatform-ui'
+include ':faceplatform-release'
+include ':faceplatform-ui'

@@ -1,0 +1,76 @@
+group 'com.opun.flutter.flutter_ai_face'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        /**子模块含有aar:添加全局引用*/
+        flatDir {
+            // 由于Flutter插件 module中引用了 aar，
+            // 其他工程编译时会报错，所以需要在所有工程的repositories
+            // 下把Library module中的libs目录添加到依赖关系中
+            dirs project(':flutter_ai_face').file('libs');
+//            dirs 'libs'
+            //注意：project后面是aar包的模块名 arm64-v8a
+        }
+    }
+
+
+}
+
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi-v7a','arm64-v8a'
+        }
+    }
+    buildTypes{
+        debug{
+            ndk {
+                // 设置支持的SO库架构
+                abiFilters 'armeabi-v7a','arm64-v8a'
+            }
+        }
+        release {
+            ndk {
+                abiFilters 'armeabi-v7a','arm64-v8a'
+            }
+        }
+
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    sourceSets {
+        main {
+            jni.srcDirs = []  //这一行加不加都可以
+            jniLibs.srcDirs = ['libs']//这个必须加，因为我们把.so文件放在了libs文件夹中
+        }
+    }
+}
+dependencies {
+    implementation(name: 'faceplatform-release', ext: 'aar')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation project("::faceplatform-ui")
+//    implementation project(project.path+ '::faceplatform-ui' )
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+}

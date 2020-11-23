@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/faceplatform-release/faceplatform-release.iml" filepath="$PROJECT_DIR$/.idea/modules/faceplatform-release/faceplatform-release.iml" group="flutter_ai_face/faceplatform-release" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/faceplatform-ui/faceplatform-ui.iml" filepath="$PROJECT_DIR$/.idea/modules/faceplatform-ui/faceplatform-ui.iml" group="flutter_ai_face/faceplatform-ui" />
+      <module fileurl="file://$PROJECT_DIR$/flutter_ai_face.iml" filepath="$PROJECT_DIR$/flutter_ai_face.iml" group="flutter_ai_face" />
+      <module fileurl="file://$PROJECT_DIR$/android/flutter_ai_face_android.iml" filepath="$PROJECT_DIR$/android/flutter_ai_face_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/android/flutter_ai_face_example_android.iml" filepath="$PROJECT_DIR$/example/android/flutter_ai_face_example_android.iml" />
+    </modules>
+  </component>
+</project>
