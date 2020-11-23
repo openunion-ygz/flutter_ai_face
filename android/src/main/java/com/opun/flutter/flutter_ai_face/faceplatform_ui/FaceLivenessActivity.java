@@ -189,7 +189,7 @@ public class FaceLivenessActivity extends Activity implements
         addImageView();
         mViewBg = findViewById(R.id.view_live_bg);
     }
-/*
+
     protected void showAgreementDialog() {
         AlertDialog.Builder agreementBuilder = new AlertDialog.Builder(this, R.style.loading_dialog_style);
         View dialogView = View.inflate(this, R.layout.layout_agreement_dialog, null);
@@ -229,7 +229,7 @@ public class FaceLivenessActivity extends Activity implements
         agreementAlert.getWindow().setBackgroundDrawableResource(R.drawable.shape_layout_dialog_bg);
         agreementAlert.show();
     }
-*/
+
     /**
      * 设置屏幕亮度
      */
@@ -266,10 +266,10 @@ public class FaceLivenessActivity extends Activity implements
         super.onResume();
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mVolumeReceiver = VolumeUtils.registerVolumeReceiver(this, this);
-        if (mFaceDetectRoundView != null) {
-            mFaceDetectRoundView.setTipTopText("请将脸移入取景框");
-        }
-        startPreview();
+//        if (mFaceDetectRoundView != null) {
+//            mFaceDetectRoundView.setTipTopText("请将脸移入取景框");
+//        }
+//        startPreview();
     }
 
     @Override
