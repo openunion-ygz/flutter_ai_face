@@ -2,6 +2,7 @@ package com.opun.flutter.flutter_ai_face;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.baidu.idl.face.platform.FaceStatusNewEnum;
@@ -76,5 +77,15 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity implements
             mTimeoutDialog.dismiss();
         }
         finish();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            return true;
+        }
+        if (keyCode == KeyEvent.KEYCODE_HOME){
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

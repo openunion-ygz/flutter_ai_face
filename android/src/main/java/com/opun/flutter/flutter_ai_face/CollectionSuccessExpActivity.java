@@ -39,6 +39,9 @@ public class CollectionSuccessExpActivity extends CollectionSuccessActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK){
             return true;
         }
+        if (keyCode == KeyEvent.KEYCODE_HOME){
+            return true;
+        }
         return super.onKeyDown(keyCode, event);
     }
 }
