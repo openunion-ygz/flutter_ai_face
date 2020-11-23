@@ -12,40 +12,48 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="温馨提示"
-        android:textColor="@color/agreement_color_FE5824"
-        android:textSize="24dp"
+        android:textColor="@color/item_main_color_selected"
+        android:textSize="20dp"
         android:textStyle="bold" />
+    <LinearLayout
+        android:id="@+id/ll_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title_agreement_dialog"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        >
 
-    <TextView
-        android:id="@+id/tv_content_agreement_dialog_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title_agreement_dialog"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="是否同意？"
-        android:textSize="20dp" />
-    <TextView
-        android:id="@+id/tv_content_agreement_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title_agreement_dialog"
-        android:layout_toRightOf="@+id/tv_content_agreement_dialog_hint"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="《人脸验证协议》"
-        android:textColor="@color/agreement_color_FE5824"
-        android:textSize="20dp" />
+        <TextView
+            android:id="@+id/tv_content_agreement_dialog_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title_agreement_dialog"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="请问您是否同意"
+            android:textSize="18dp" />
+        <TextView
+            android:id="@+id/tv_content_agreement_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title_agreement_dialog"
+            android:layout_toRightOf="@+id/tv_content_agreement_dialog_hint"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="《人脸验证协议》"
+            android:textColor="@color/item_main_color_selected"
+            android:textSize="18dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/tv_content_agreement_dialog"
+        android:layout_below="@+id/ll_context"
         android:orientation="horizontal">
 
         <TextView
@@ -55,7 +63,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="取消"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <View
             android:layout_width="1dp"
@@ -71,8 +79,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="同意"
-            android:textColor="@color/agreement_color_FE5824"
-            android:textSize="20dp" />
+            android:textColor="@color/item_main_color_selected"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
