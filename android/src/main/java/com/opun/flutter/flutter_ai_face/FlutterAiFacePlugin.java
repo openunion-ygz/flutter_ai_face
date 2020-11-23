@@ -19,7 +19,10 @@ import com.baidu.idl.face.platform.LivenessTypeEnum;
 import com.baidu.idl.face.platform.listener.IInitCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
@@ -43,7 +46,6 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
     private Context mContext;
     private Activity activity;
     public static final int PERMISSION_REQUEST_CODE = 999;
-    //  private FaceDetectActivity faceDetectActivity;
     // 动作活体条目集合
     public static List<LivenessTypeEnum> livenessList = new ArrayList<>();
     // 活体随机开关
@@ -174,6 +176,11 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
 
     //释放资源，防止内存溢出
     private void aiFaceRelease() {
+        eventSink.endOfStream();
+    }
+
+    protected static void faceLiveSuccess(String faceBitmapStr){
+        eventSink.success(faceBitmapStr);
     }
 
     private void showToast(String msg) {
@@ -212,6 +219,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
                     activity.requestPermissions(requestArray, requestCode);
                 } else {
                     mIsInitSuccess = true;
+                    aiFaceInit();
                 }
             }
         } catch (Exception e) {
@@ -313,6 +321,26 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
         livenessList.add(LivenessTypeEnum.HeadLeftOrRight);
     }
 
+    private static Map<String, Activity> destroyMap = new HashMap<>();
+
+    /**
+     * 添加到销毁队列
+     * @param activity 要销毁的activity
+     */
+    public static void addDestroyActivity(Activity activity, String activityName) {
+        destroyMap.put(activityName, activity);
+    }
+
+    /**
+     * 销毁指定Activity
+     */
+    public static void destroyActivity(String activityName) {
+        Set<String> keySet = destroyMap.keySet();
+        for (String key : keySet) {
+            destroyMap.get(key).finish();
+        }
+    }
+
 
     @Override
     public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -328,9 +356,8 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
             mIsInitSuccess = false;
             aiFaceInit();
         } else {
-            addActionLive();
-            initLicense();
             mIsInitSuccess = true;
+            aiFaceInit();
         }
         return false;
     }

@@ -21,8 +21,8 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 添加至销毁列表
-//        ExampleApplication.addDestroyActivity(FaceLivenessExpActivity.this,
-//                "FaceLivenessExpActivity");
+        FlutterAiFacePlugin.addDestroyActivity(FaceLivenessExpActivity.this,
+                "FaceLivenessExpActivity");
     }
 
     @Override

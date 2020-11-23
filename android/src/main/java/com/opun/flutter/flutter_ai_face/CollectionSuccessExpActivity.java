@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.opun.flutter.flutter_ai_face.faceplatform_ui.CollectionSuccessActivity;
+import com.opun.flutter.flutter_ai_face.faceplatform_ui.utils.IntentUtils;
 
 
 /**
@@ -21,12 +22,14 @@ public class CollectionSuccessExpActivity extends CollectionSuccessActivity {
     // 回到首页
     public void onReturnHome(View v) {
         super.onReturnHome(v);
-//        if ("FaceLivenessExpActivity".equals(mDestroyType)) {
-//            ExampleApplication.destroyActivity("FaceLivenessExpActivity");
-//        }
-//        if ("FaceDetectExpActivity".equals(mDestroyType)) {
-//            ExampleApplication.destroyActivity("FaceDetectExpActivity");
-//        }
+        if ("FaceLivenessExpActivity".equals(mDestroyType)) {
+            FlutterAiFacePlugin.destroyActivity("FaceLivenessExpActivity");
+        }
+        if ("FaceDetectExpActivity".equals(mDestroyType)) {
+            FlutterAiFacePlugin.destroyActivity("FaceDetectExpActivity");
+        }
+        String faceBitmapStr = IntentUtils.getInstance().getBitmap();
+        FlutterAiFacePlugin.faceLiveSuccess(faceBitmapStr);
         finish();
     }
 }

@@ -60,7 +60,7 @@
         android:paddingBottom="15dp"
         android:layout_below="@id/view_line2"
         android:background="@color/background"
-        android:text="回到首页"
+        android:text="退出"
         android:textSize="18sp"
         android:textColor="#666666"/>
 </RelativeLayout>

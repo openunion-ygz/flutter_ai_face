@@ -21,8 +21,8 @@ public class FaceDetectExpActivity extends FaceDetectActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 添加至销毁列表
-//        ExampleApplication.addDestroyActivity(FaceDetectExpActivity.this,
-//                "FaceDetectExpActivity");
+        FlutterAiFacePlugin.addDestroyActivity(FaceDetectExpActivity.this,
+                "FaceDetectExpActivity");
     }
 
     @Override
