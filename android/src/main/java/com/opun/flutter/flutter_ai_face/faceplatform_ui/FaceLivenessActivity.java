@@ -228,6 +228,7 @@ public class FaceLivenessActivity extends Activity implements
         //设置window背景才是对话框最后的背景样式
         agreementAlert.getWindow().setBackgroundDrawableResource(R.drawable.shape_layout_dialog_bg);
         agreementAlert.show();
+        isShowAgreement = true;
     }
 
     /**
@@ -471,6 +472,8 @@ public class FaceLivenessActivity extends Activity implements
         return result;
     }
 
+    private boolean isShowAgreement = false;
+
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         mIsCreateSurface = true;
@@ -486,8 +489,12 @@ public class FaceLivenessActivity extends Activity implements
         if (holder.getSurface() == null) {
             return;
         }
-//        startPreview();
-        showAgreementDialog();
+        if (!isShowAgreement){
+            showAgreementDialog();
+        }else {
+            startPreview();
+        }
+
     }
 
     @Override
