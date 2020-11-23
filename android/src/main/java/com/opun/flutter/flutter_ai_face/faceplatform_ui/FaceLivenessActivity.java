@@ -266,10 +266,11 @@ public class FaceLivenessActivity extends Activity implements
         super.onResume();
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mVolumeReceiver = VolumeUtils.registerVolumeReceiver(this, this);
-//        if (mFaceDetectRoundView != null) {
-//            mFaceDetectRoundView.setTipTopText("请将脸移入取景框");
-//        }
-//        startPreview();
+        if (mFaceDetectRoundView != null) {
+            mFaceDetectRoundView.setTipTopText("请将脸移入取景框");
+        }
+        startPreview();
+//        showAgreementDialog();
     }
 
     @Override
@@ -485,7 +486,8 @@ public class FaceLivenessActivity extends Activity implements
         if (holder.getSurface() == null) {
             return;
         }
-        startPreview();
+//        startPreview();
+        showAgreementDialog();
     }
 
     @Override
