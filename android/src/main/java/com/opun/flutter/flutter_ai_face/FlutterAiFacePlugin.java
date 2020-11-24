@@ -177,6 +177,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
     //释放资源，防止内存溢出
     private void aiFaceRelease() {
         eventSink.endOfStream();
+        FaceSDKManager.release();
     }
 
     protected static void faceLiveSuccess(String faceBitmapStr){
@@ -337,7 +338,9 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
     public static void destroyActivity(String activityName) {
         Set<String> keySet = destroyMap.keySet();
         for (String key : keySet) {
-            destroyMap.get(key).finish();
+            if (key.equals(activityName)){
+                destroyMap.get(key).finish();
+            }
         }
     }
 

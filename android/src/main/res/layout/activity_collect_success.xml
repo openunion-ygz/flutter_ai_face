@@ -16,16 +16,16 @@
 
     <RelativeLayout
         android:id="@+id/relative_suc_head"
-        android:layout_width="97dp"
-        android:layout_height="108dp"
+        android:layout_width="164dp"
+        android:layout_height="178dp"
         android:layout_marginTop="96dp"
         android:layout_centerHorizontal="true">
 
         <com.opun.flutter.flutter_ai_face.faceplatform_ui.widget.CircleImageView
             android:id="@+id/circle_head"
             android:layout_centerInParent="true"
-            android:layout_width="97dp"
-            android:layout_height="97dp" />
+            android:layout_width="160dp"
+            android:layout_height="160dp" />
 
         <ImageView
             android:id="@+id/image_circle"
