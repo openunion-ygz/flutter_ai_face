@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       platformVersion = await FlutterAiFace.platformVersion;
       bool isInitSuccess = await FlutterAiFace.instance.aiFaceInit();
       print('===>$isInitSuccess');
-      FlutterAiFace.instance.faceCollect();
+//      FlutterAiFace.instance.faceCollect();
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }

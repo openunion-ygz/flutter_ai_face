@@ -13,11 +13,24 @@ A new Flutter plugin.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
-  s.public_header_files = 'Classes/**/*.h'
+  #引入系统库
+  s.ios.libraries = 'stdc++','z'
+  #引入百度ai平台license
+  s.source_files = 'Classes/**/*','Frameworks/BDFaceSDK/*','Classes/BDFaceSDK/**/*'
+  #引入头文件
+  # 'Frameworks/BDFaceFaceSDKUI/Public/Common/*.h','Frameworks/BDFaceFaceSDKUI/Public/Model/*.h','Frameworks/BDFaceFaceSDKUI/Public/Util/*.h','Frameworks/BDFaceFaceSDKUI/UI/**/*.h','Frameworks/BDFaceFaceSDKUI/UI/Controller/*.h','Frameworks/BDFaceFaceSDKUI/UI/View/*.h'
+  s.public_header_files = 'Classes/**/*.h','Classes/BDFaceSDK/FaceParameterConfig.h'
   s.dependency 'Flutter'
-  s.platform = :ios, '8.0'
+  s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
+
+  #引入百度ai framework
+    s.ios.vendored_frameworks = 'Frameworks/BDFaceSDK/IDLFaceSDK.framework'
+    s.vendored_frameworks = 'IDLFaceSDK.framework'
+
+  # 引入.bundle文件
+      s.resources = "Frameworks/BDFaceSDK/*.bundle"
+
 end
