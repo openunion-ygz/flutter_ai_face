@@ -16,10 +16,9 @@ A new Flutter plugin.
   #引入系统库
   s.ios.libraries = 'stdc++','z'
   #引入百度ai平台license
-  s.source_files = 'Classes/**/*','Frameworks/BDFaceSDK/*','Classes/BDFaceSDK/**/*'
+  s.source_files = 'Classes/**/*','BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios'
   #引入头文件
-  # 'Frameworks/BDFaceFaceSDKUI/Public/Common/*.h','Frameworks/BDFaceFaceSDKUI/Public/Model/*.h','Frameworks/BDFaceFaceSDKUI/Public/Util/*.h','Frameworks/BDFaceFaceSDKUI/UI/**/*.h','Frameworks/BDFaceFaceSDKUI/UI/Controller/*.h','Frameworks/BDFaceFaceSDKUI/UI/View/*.h'
-  s.public_header_files = 'Classes/**/*.h','Classes/BDFaceSDK/FaceParameterConfig.h'
+  s.public_header_files = 'Classes/**/*.h','BDFaceSDK/FaceParameterConfig.h'
   s.dependency 'Flutter'
   s.platform = :ios, '11.0'
 
@@ -27,10 +26,10 @@ A new Flutter plugin.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
 
   #引入百度ai framework
-    s.ios.vendored_frameworks = 'Frameworks/BDFaceSDK/IDLFaceSDK.framework'
+    s.ios.vendored_frameworks = 'BDFaceSDK/IDLFaceSDK.framework'
     s.vendored_frameworks = 'IDLFaceSDK.framework'
 
   # 引入.bundle文件
-      s.resources = "Frameworks/BDFaceSDK/*.bundle"
+  s.ios.resources = "BDFaceSDK/*.bundle",'BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios'
 
 end

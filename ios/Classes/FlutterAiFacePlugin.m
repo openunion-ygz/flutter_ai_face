@@ -39,7 +39,11 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"ByOrder"];
     [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"checkAgreeBtn"];
     
-    NSString* licensePath = [NSString stringWithFormat:@"%@.%@", FACE_LICENSE_NAME, FACE_LICENSE_SUFFIX ];
+    NSString* licensePath = [NSString stringWithFormat:@"%@.%@",  FACE_LICENSE_NAME, FACE_LICENSE_SUFFIX ];
+    
+//    NSString *licensePath = [[NSBundle mainBundle] pathForResource:FACE_LICENSE_NAME ofType:FACE_LICENSE_SUFFIX];
+
+    NSLog(@"aiFaceUnInit >>>>>> %@",[NSString stringWithFormat:@"%@",licensePath]);
     [[FaceSDKManager sharedInstance] setLicenseID:FACE_LICENSE_ID andLocalLicenceFile:licensePath andRemoteAuthorize:false];
     NSLog(@"canWork = %d",[[FaceSDKManager sharedInstance] canWork]);
     NSLog(@"version = %@",[[FaceSDKManager sharedInstance] getVersion]);
