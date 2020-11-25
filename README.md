@@ -6,7 +6,9 @@ A new Flutter plugin.
 
 #主工程中添加混淆
 #ai_face（Android）
+
 -keep class com.baidu.vis.unified.license.**{*;}
+
 -keep class com.baidu.idl.main.facesdk.**{*;}
 
 #百度ai(IOS)
