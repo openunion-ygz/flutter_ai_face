@@ -14,6 +14,7 @@
 #import "BDFaceLivingConfigModel.h"
 #import "BDFaceLogoView.h"
 #import "BDFaceImageShow.h"
+#import "FlutterAiFacePlugin.h"
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -84,7 +85,7 @@
 
     UILabel *labelSecond = [[UILabel alloc] init];
     labelSecond.frame = CGRectMake((ScreenWidth-72) / 2, 529, 72, 18);
-    labelSecond.text = @"回到首页";
+    labelSecond.text = @"完成采集";
     labelSecond.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     labelSecond.textColor = [UIColor colorWithRed:51 / 255.0 green:51 / 255.0 blue:51 / 255.0 alpha:1 / 1.0];
     [self.view addSubview:labelSecond];
@@ -141,6 +142,9 @@
 - (IBAction)backToViewController:(UIButton *)sender{
     // TODO
     [self dismissViewControllerAnimated:YES completion:nil];
+    NSString *faceStr = [[BDFaceImageShow sharedInstance] getOriginalImageEncryptStr];
+    NSLog(@"originalImageEncryptStr >>>>>%@",faceStr);
+    [FlutterAiFacePlugin handleFaceCollectResult:faceStr];
 
 }
 

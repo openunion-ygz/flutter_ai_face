@@ -88,6 +88,7 @@
         
         switch (remindCode) {
             case LivenessRemindCodeOK: {
+//                人脸采集成功
                 weakSelf.hasFinished = YES;
                 [self warningStatus:CommonStatus warning:@"非常好"];
                 if (images[@"image"] != nil && [images[@"image"] count] != 0) {
@@ -99,8 +100,12 @@
                     }
 
                     FaceCropImageInfo * bestImage = imageArr[0];
+                    
+                    NSLog(@"originalImage String ===>%@", bestImage.originalImageEncryptStr);
+                    
                     [[BDFaceImageShow sharedInstance] setSuccessImage:bestImage.originalImage];
                     [[BDFaceImageShow sharedInstance] setSilentliveScore:bestImage.silentliveScore];
+                    [[BDFaceImageShow sharedInstance] setOriginalImageEncryptStr:bestImage.originalImageEncryptStr];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         UIViewController* fatherViewController = weakSelf.presentingViewController;

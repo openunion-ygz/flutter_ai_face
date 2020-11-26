@@ -28,12 +28,20 @@
     _silentliveScore = score;
 }
 
+-(void)setOriginalImageEncryptStr:(NSString *)originalImageStr{
+    _originalImageEncryptStr = originalImageStr;
+}
+
 - (UIImage *)getSuccessImage{
     return self.successImage;
 }
 
 - (float)getSilentliveScore{
     return self.silentliveScore;
+}
+
+- (NSString *)getOriginalImageEncryptStr{
+    return self.originalImageEncryptStr;
 }
 
 - (void)reset{

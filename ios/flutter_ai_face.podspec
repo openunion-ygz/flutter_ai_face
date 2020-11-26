@@ -31,5 +31,6 @@ A new Flutter plugin.
 
   # 引入.bundle文件
   s.ios.resources = "BDFaceSDK/*.bundle",'BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios'
+  s.resources = 'Assets/**/*'
 
 end

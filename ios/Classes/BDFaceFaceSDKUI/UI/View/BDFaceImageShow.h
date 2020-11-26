@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) float silentliveScore;
 
+@property (nonatomic,readwrite) NSString *originalImageEncryptStr;
+
 + (instancetype)sharedInstance;
 
 - (void)setSuccessImage:(UIImage *)image;
@@ -28,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (float)getSilentliveScore;
 
 - (void) reset;
+
+-(void) setOriginalImageEncryptStr:(NSString *)originalImageEncryptStr;
+
+-(NSString *)getOriginalImageEncryptStr;
 
 @end
 

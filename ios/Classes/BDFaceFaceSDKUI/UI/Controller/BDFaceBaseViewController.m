@@ -167,7 +167,7 @@
     // 回到首页的label
     _timeOutBackToMainLabel2 = [[UILabel alloc] init];
     _timeOutBackToMainLabel2.frame = CGRectMake((ScreenWidth-72) / 2, 424.3, 72, 18);
-    _timeOutBackToMainLabel2.text = @"回到首页";
+    _timeOutBackToMainLabel2.text = @"取消";
     _timeOutBackToMainLabel2.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     _timeOutBackToMainLabel2.textColor = [UIColor colorWithRed:102 / 255.0 green:102 / 255.0 blue:102 / 255.0 alpha:1 / 1.0];
     
