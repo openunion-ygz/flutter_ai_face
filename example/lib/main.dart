@@ -29,6 +29,12 @@ class _MyAppState extends State<MyApp> {
     try {
       platformVersion = await FlutterAiFace.platformVersion;
       bool isInitSuccess = await FlutterAiFace.instance.aiFaceInit();
+      FlutterAiFace.aiFaceCallBackListener((faceData) {
+        print('aiFaceCallBackListener ===>$faceData');
+        setState(() {
+          _platformVersion = faceData;
+        });
+      });
       print('===>$isInitSuccess');
 //      FlutterAiFace.instance.faceCollect();
     } on PlatformException {

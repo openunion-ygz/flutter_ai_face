@@ -144,7 +144,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     NSString *faceStr = [[BDFaceImageShow sharedInstance] getOriginalImageEncryptStr];
     NSLog(@"originalImageEncryptStr >>>>>%@",faceStr);
-    [FlutterAiFacePlugin handleFaceCollectResult:faceStr];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:@{@"faceStr":faceStr}];
 
 }
 

@@ -10,9 +10,19 @@ class FlutterAiFace {
   static EventChannel _aiFaceCallBackChannel =
       const EventChannel('${Constants.aiFaceCallBackChannel}');
 
+  final StreamController<MethodCall> _methodStreamController =
+  new StreamController.broadcast(); // ignore: close_sinks
+  Stream<MethodCall> get _methodStream => _methodStreamController
+      .stream;
+
   FlutterAiFace._() {
     //在原生中注册的事件通知通道也必须要在flutter注册，否则会通道对象无法实例化。
     _aiFaceCallBackChannel.receiveBroadcastStream();
+    _channel.setMethodCallHandler((MethodCall call) {
+      _methodStreamController.add(call);
+      return;
+    });
+
   }
 
   static FlutterAiFace _instance = new FlutterAiFace._();

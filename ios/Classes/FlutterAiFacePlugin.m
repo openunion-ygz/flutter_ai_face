@@ -12,6 +12,10 @@
 #define ScreenRect [UIScreen mainScreen].bounds
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
+@interface FlutterAiFacePlugin ()
+@property(nonatomic, retain) FlutterMethodChannel *channel;
+@property(nonatomic, retain) FlutterAiFaceStreamHandler *eventStreamHandler;
+@end
 
 @implementation FlutterAiFacePlugin{
     FlutterResult _result;
@@ -19,30 +23,24 @@
 }
 
 
-+ (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
++ (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar,FlutterStreamHandler>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel
       methodChannelWithName:@"flutter_ai_face"
             binaryMessenger:[registrar messenger]];
-    UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-    //单项通信管道，原生向Flutter发送消息
-    FlutterEventChannel *eventChannel = [FlutterEventChannel eventChannelWithName:@"aiFaceCallBackChannel" binaryMessenger:viewController];
-    [eventChannel setStreamHandler:self];
+  UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+  FlutterEventChannel *eventChannel = [FlutterEventChannel eventChannelWithName:@"aiFaceCallBackChannel" binaryMessenger:[registrar messenger]];
+    
+//  [eventChannel setStreamHandler:self];
     
   FlutterAiFacePlugin* instance = [[FlutterAiFacePlugin alloc] initWithViewController:viewController];
+  instance.channel = channel;
+    
+  FlutterAiFaceStreamHandler* eventStreamHandler = [[FlutterAiFaceStreamHandler alloc] init];
+    
+  [eventChannel setStreamHandler:eventStreamHandler];
+  instance.eventStreamHandler = eventStreamHandler;
+    
   [registrar addMethodCallDelegate:instance channel:channel];
-}
-
-#pragma --mark FlutterStreamHandler代理
-- (FlutterError* _Nullable)onListenWithArguments:(id _Nullable)arguments
-                                       eventSink:(FlutterEventSink)events {
-    if (events) {
-        self.eventSink  = events;
-    }
-    return nil;
-}
-// 不再需要向Flutter传递消息
-- (FlutterError* _Nullable)onCancelWithArguments:(id _Nullable)arguments {
-    return nil;
 }
 
 - (instancetype)initWithViewController:(UIViewController *)viewController {
@@ -125,6 +123,7 @@
     } else {
         [self faceDetect];
     }
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFaceCollectResult:) name:@"notification" object:nil];
 }
 
 
@@ -144,7 +143,6 @@
 }
 
 -(void)aiFaceInit{
-    NSString* _isInitSuccessStr = @"false";
     NSLog(@"aiFaceInit >>>>>>");
     [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"SoundMode"];
     [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"LiveMode"];
@@ -152,43 +150,45 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"checkAgreeBtn"];
     NSString* licensePath = [NSString stringWithFormat:@"%@.%@",  FACE_LICENSE_NAME, FACE_LICENSE_SUFFIX ];
     [[FaceSDKManager sharedInstance] setLicenseID:FACE_LICENSE_ID andLocalLicenceFile:licensePath andRemoteAuthorize:false];
-    NSLog(@"canWork = %d",[[FaceSDKManager sharedInstance] canWork]);
-    NSLog(@"version = %@",[[FaceSDKManager sharedInstance] getVersion]);
-    
     [self initLivenesswithList];
     if ([[FaceSDKManager sharedInstance] canWork]) {
         [self initSDK];
-       _isInitSuccessStr = @"true";
+       _result(@YES);
     }else{
-       _isInitSuccessStr = @"false";
+       _result(@NO);
     }
-    _result(_isInitSuccessStr);
+    
 }
 
 -(void)aiFaceUnInit{
-     NSLog(@"aiFaceUnInit >>>>>>");
     // 销毁SDK功能函数
-      [[FaceSDKManager sharedInstance] uninitCollect];
+     [[FaceSDKManager sharedInstance] uninitCollect];
+    
+     [[NSNotificationCenter defaultCenter] removeObserver:@"notificationfun"];
+    //或者
+    //尽量不要使用，这种移除方式可能会移除系统的通知
+//     [[NSNotificationCenter defaultCenter] removeObserver:self];
     _result(nil);
 }
 -(void)faceCollect{
-    NSLog(@"faceCollect >>>>>>");
     // 读取设置配置，启动活体检测与否
     NSNumber *LiveMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"LiveMode"];
-    NSLog(@"faceCollect LiveMode >>>>>>%@",LiveMode.description);
       if (LiveMode.boolValue){
           [self faceLiveness];
       } else {
           [self faceDetect];
       }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFaceCollectResult:) name:@"notification" object:nil];
 }
 
-+(void) handleFaceCollectResult:(NSString *)faceStr{
-//    self.eventSink(faceStr);
-    NSLog(@"handleFaceCollectResult ====>%@",faceStr);
+-(void)handleFaceCollectResult:(NSNotification *)info {
+    NSString *faceStr = info.userInfo[@"faceStr"];
+    if (_eventStreamHandler.faceEventSink != nil) {
+     self.eventStreamHandler.faceEventSink(faceStr);
+    }
     
 }
-
 
 - (void) initSDK {
     if (![[FaceSDKManager sharedInstance] canWork]){
@@ -266,17 +266,30 @@
 
 
 }
-
 - (void)sendOnChannel:(nonnull NSString *)channel message:(NSData * _Nullable)message {
-    <#code#>
+    
 }
 
 - (void)sendOnChannel:(nonnull NSString *)channel message:(NSData * _Nullable)message binaryReply:(FlutterBinaryReply _Nullable)callback {
-    <#code#>
+    
 }
 
 - (void)setMessageHandlerOnChannel:(nonnull NSString *)channel binaryMessageHandler:(FlutterBinaryMessageHandler _Nullable)handler {
-    <#code#>
+    
+}
+
+@end
+
+@implementation FlutterAiFaceStreamHandler
+
+- (FlutterError*)onListenWithArguments:(id)arguments eventSink:(FlutterEventSink)eventSink {
+  self.faceEventSink = eventSink;
+  return nil;
+}
+
+- (FlutterError*)onCancelWithArguments:(id)arguments {
+  self.faceEventSink = nil;
+  return nil;
 }
 
 @end
