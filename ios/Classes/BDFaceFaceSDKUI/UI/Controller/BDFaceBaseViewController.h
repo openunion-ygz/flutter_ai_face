@@ -51,7 +51,6 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic,readwrite,retain) BDFaceRemindAnimationView *remindAnimationView;
 
-
 - (void)isTimeOut:(BOOL)isOrNot;
 
 - (void)selfReplayFunction; // 重新开始

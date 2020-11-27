@@ -9,5 +9,8 @@
 #import "BDFaceBaseViewController.h"
 
 @interface BDFaceDetectionViewController : BDFaceBaseViewController
+//人脸验证协议对话框
+@property (strong, nonatomic) UIAlertAction *okAction;
+@property (strong, nonatomic) UIAlertAction *cancelAction;
 
 @end

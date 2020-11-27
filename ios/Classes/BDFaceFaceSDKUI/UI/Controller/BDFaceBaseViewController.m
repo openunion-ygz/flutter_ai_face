@@ -133,7 +133,7 @@
     // 超时的label
     _timeOutLabel = [[UILabel alloc] init];
     _timeOutLabel.frame = CGRectMake((ScreenWidth-160) / 2, 309.3, 160, 22);
-    _timeOutLabel.text = @"检测超时，请按照提示重试";
+    _timeOutLabel.text = @"检测超时";
     _timeOutLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     _timeOutLabel.textColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:1 / 1.0];
     
@@ -462,6 +462,7 @@
         [alert addAction:action];
         UIViewController* fatherViewController = weakSelf.presentingViewController;
         [weakSelf dismissViewControllerAnimated:YES completion:^{
+//            申请权限成功
             [fatherViewController presentViewController:alert animated:YES completion:nil];
         }];
     });

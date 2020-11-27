@@ -140,12 +140,9 @@
 }
 
 - (IBAction)backToViewController:(UIButton *)sender{
-    // TODO
     [self dismissViewControllerAnimated:YES completion:nil];
     NSString *faceStr = [[BDFaceImageShow sharedInstance] getOriginalImageEncryptStr];
-    NSLog(@"originalImageEncryptStr >>>>>%@",faceStr);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:@{@"faceStr":faceStr}];
-
 }
 
 - (IBAction)backAction:(UIButton *)sender{
