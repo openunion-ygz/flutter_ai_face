@@ -7,4 +7,9 @@
 //人脸采集成功通道
 @property (nonatomic, copy) FlutterEventSink faceEventSink;
 
+/**
+ *  协议view
+ */
+@property (nonatomic, readwrite, retain) UIView *agreementView;
+
 @end

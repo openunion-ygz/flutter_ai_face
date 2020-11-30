@@ -16,12 +16,15 @@
 #define ByOrder @"ByOrder"
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define ScreenRect [UIScreen mainScreen].bounds
 
 @interface BDFaceLivingConfigViewController ()
 @property (strong, nonatomic) UISwitch *voiceSwitch;
 @property (strong, nonatomic) UIImageView *warningView;
 @property (strong, nonatomic) UILabel *waringLabel;
 @property (strong, nonatomic) UIView *liveView;
+
+
 @end
 
 @implementation BDFaceLivingConfigViewController{
@@ -168,6 +171,7 @@
     } else {
         self.liveView.hidden = YES;
     }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

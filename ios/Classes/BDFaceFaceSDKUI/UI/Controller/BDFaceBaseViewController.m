@@ -51,6 +51,7 @@
 
 
 
+
 @end
 
 @implementation BDFaceBaseViewController
@@ -124,6 +125,8 @@
     self.timeOutView = [[UIView alloc] init];
     self.timeOutView.frame = CGRectMake((ScreenWidth-320) / 2, 179.3, 320, 281.3);
     self.timeOutView.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:255 / 255.0 blue:255 / 255.0 alpha:1 / 1.0];
+    self.timeOutView.layer.cornerRadius = 10;
+    self.timeOutView.layer.masksToBounds = YES;
     
     // 超时的image
     _timeOutImageView = [[UIImageView alloc] init];
@@ -132,7 +135,7 @@
     
     // 超时的label
     _timeOutLabel = [[UILabel alloc] init];
-    _timeOutLabel.frame = CGRectMake((ScreenWidth-160) / 2, 309.3, 160, 22);
+    _timeOutLabel.frame = CGRectMake((ScreenWidth / 2)-40, 309.3, 160, 22);
     _timeOutLabel.text = @"检测超时";
     _timeOutLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     _timeOutLabel.textColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:1 / 1.0];
@@ -166,7 +169,7 @@
     
     // 回到首页的label
     _timeOutBackToMainLabel2 = [[UILabel alloc] init];
-    _timeOutBackToMainLabel2.frame = CGRectMake((ScreenWidth-72) / 2, 424.3, 72, 18);
+    _timeOutBackToMainLabel2.frame = CGRectMake((ScreenWidth / 2)-18, 424.3, 72, 18);
     _timeOutBackToMainLabel2.text = @"取消";
     _timeOutBackToMainLabel2.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     _timeOutBackToMainLabel2.textColor = [UIColor colorWithRed:102 / 255.0 green:102 / 255.0 blue:102 / 255.0 alpha:1 / 1.0];
@@ -285,6 +288,23 @@
 //    UIImageView* minImage= [[UIImageView alloc]init];
 //    minImage = [self creatRectangle:minImage withRect:_minRect];
 //    [self.view addSubview:minImage];
+    
+//      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAgreeResult:) name:@"agreeNotification" object:nil];
+}
+
+-(void)handleAgreeResult:(NSNotification *)info {
+    NSString *backFromAgreement = info.userInfo[@"backFromAgreement"];
+      NSLog(@"handleAgreeResult ====>%@",backFromAgreement);
+    if ([backFromAgreement isEqualToString:@"YES"]) {
+         NSLog(@"handleAgreeResult ====>%@",@"2222");
+        self.videoCapture.runningStatus = YES;
+          NSLog(@"handleAgreeResult ====>%@",@"333");
+        [self.videoCapture startSession];
+          NSLog(@"handleAgreeResult ====>%@",@"444");
+//        [self reStart];
+        [self selfReplayFunction];
+    }
+    
 }
 #pragma mark-绘框方法
 - (UIImageView *)creatRectangle:(UIImageView *)imageView withRect:(CGRect) rect{
@@ -462,7 +482,6 @@
         [alert addAction:action];
         UIViewController* fatherViewController = weakSelf.presentingViewController;
         [weakSelf dismissViewControllerAnimated:YES completion:^{
-//            申请权限成功
             [fatherViewController presentViewController:alert animated:YES completion:nil];
         }];
     });

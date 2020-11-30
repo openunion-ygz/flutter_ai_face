@@ -84,6 +84,7 @@
 }
 
 - (IBAction)backAction:(UIButton *)sender{
+//       [[NSNotificationCenter defaultCenter] postNotificationName:@"agreeNotification" object:nil userInfo:@{@"backFromAgreement":@"YES"}];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

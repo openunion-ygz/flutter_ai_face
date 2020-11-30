@@ -16,5 +16,9 @@
 @property (strong, nonatomic) UIAlertAction *okAction;
 @property (strong, nonatomic) UIAlertAction *cancelAction;
 
+/**
+ *  协议view
+ */
+@property (nonatomic, readwrite, retain) UIView *agreementView;
 
 @end
