@@ -16,7 +16,7 @@ A new Flutter plugin.
   #引入系统库
   s.ios.libraries = 'stdc++','z'
   #引入百度ai平台license
-  s.source_files = 'Classes/**/*','BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios','BDFaceSDK/*.bundle'
+  s.source_files = 'Classes/**/*','BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios'
   #引入头文件
   s.public_header_files = 'Classes/**/*.h','BDFaceSDK/FaceParameterConfig.h'
   s.dependency 'Flutter'
