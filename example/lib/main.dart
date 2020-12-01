@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       FlutterAiFace.aiFaceCallBackListener((faceData) {
         print('aiFaceCallBackListener ===>$faceData');
         setState(() {
-          _platformVersion = faceData;
+//          _platformVersion = faceData;
         });
       });
       print('===>$isInitSuccess');

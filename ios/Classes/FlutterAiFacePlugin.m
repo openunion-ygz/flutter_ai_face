@@ -75,37 +75,19 @@
 //       [_viewController.view addSubview:startBtn];
 //       [_viewController.view addSubview:btnLabel];
 //       [startBtn addTarget:self action:@selector(startGatherAction:) forControlEvents:UIControlEventTouchUpInside];
-//
-//       UIView * remindView = [[UIView alloc] init];
-//       remindView.frame = CGRectMake((_viewController.view.frame.size.width-162)/2, 546, ScreenWidth, 14);
-//
-//       // 人脸验证协议的label，提供了点击响应事件
-//       UILabel *remindLabel = [[UILabel alloc] init];
-//       remindLabel.frame = CGRectMake(50, 0, 112, 14);
-//       remindLabel.text = @"《人脸验证协议》";
-//       remindLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
-//       remindLabel.textColor = [UIColor colorWithRed:0 / 255.0 green:186 / 255.0 blue:242 / 255.0 alpha:1 / 1.0];
-//       remindLabel.userInteractionEnabled = YES;
-//       UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(agreementAction:)];
-//       [remindLabel addGestureRecognizer:labelTapGestureRecognizer];
-//       [remindView addSubview:remindLabel];
-//       [_viewController.view addSubview:remindView];
-    
-    
        
-        // 超时的view初始化，但是不添加到当前view内
            // 超时的最底层view，大小和屏幕大小一致，为了突出弹窗的view的效果，背景为灰色，0.7的透视度
-           _agreementMainView = [[UIView alloc] init];
-           _agreementMainView.frame = ScreenRect;
-           _agreementMainView.alpha = 0.7;
-           _agreementMainView.backgroundColor = [UIColor grayColor];
+        _agreementMainView = [[UIView alloc] init];
+        _agreementMainView.frame = ScreenRect;
+        _agreementMainView.alpha = 0.7;
+        _agreementMainView.backgroundColor = [UIColor grayColor];
            
            // 弹出的主体view
-           self.agreementView = [[UIView alloc] init];
-           self.agreementView.frame = CGRectMake((ScreenWidth-320) / 2, (ScreenHeight-180)/2, 320, 180);
-           self.agreementView.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:255 / 255.0 blue:255 / 255.0 alpha:1 / 1.0];
-           self.agreementView.layer.cornerRadius = 10;
-           self.agreementView.layer.masksToBounds = YES;
+        self.agreementView = [[UIView alloc] init];
+        self.agreementView.frame = CGRectMake((ScreenWidth-320) / 2, (ScreenHeight-180)/2, 320, 180);
+        self.agreementView.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:255 / 255.0 blue:255 / 255.0 alpha:1 / 1.0];
+        self.agreementView.layer.cornerRadius = 10;
+        self.agreementView.layer.masksToBounds = YES;
         
         
         _agreementTitle = [[UILabel alloc] init];
@@ -115,21 +97,19 @@
         _agreementTitle.textColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:1 / 1.0];
         
     
-    // 创建Attributed
-           NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:@"是否同意《人脸验证协议》"];
-           // 需要改变的第一个文字的位置
-           NSUInteger firstLoc = [[noteStr string] rangeOfString:@"《"].location;
-           // 需要改变的最后一个文字的位置
-           NSUInteger secondLoc = [[noteStr string] rangeOfString:@"》"].location+1;
+         // 创建Attributed
+         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:@"是否同意《人脸采集协议》"];
+        // 需要改变的第一个文字的位置
+         NSUInteger firstLoc = [[noteStr string] rangeOfString:@"《"].location;
+        // 需要改变的最后一个文字的位置
+        NSUInteger secondLoc = [[noteStr string] rangeOfString:@"》"].location+1;
            // 需要改变的区间
            NSRange range = NSMakeRange(firstLoc, secondLoc - firstLoc);
            // 改变颜色
-           [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:range];
+           [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0 / 255.0 green:186 / 255.0 blue:242 / 255.0 alpha:1 / 1.0] range:range];
     
-           // 超时的label
            _agreementLabel = [[UILabel alloc] init];
            _agreementLabel.frame = CGRectMake((ScreenWidth -220) / 2, (ScreenHeight-180)/2+80, 220, 22);
-//           _agreementLabel.text = @"是否同意《人脸验证协议》";
           
            _agreementLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
            _agreementLabel.textColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:1 / 1.0];
@@ -137,48 +117,35 @@
         _agreementLabel.userInteractionEnabled = YES;
         [_agreementLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(agreementInfo:)]];
 
-           
-           // 区分线
            _agreementLine = [[UIView alloc] init];
            _agreementLine.frame = CGRectMake((ScreenWidth-320) / 2 +10, (ScreenHeight-180)/2+120, 300, 1);
            _agreementLine.backgroundColor = [UIColor colorWithRed:0 / 255.0 green:186 / 255.0 blue:242 / 255.0 alpha:1 / 1.0];
 
-        // 区分线
         _agreementLine2 = [[UIView alloc] init];
         _agreementLine2.frame = CGRectMake(ScreenWidth / 2, (ScreenHeight-180)/2+130, 1, 36);
         _agreementLine2.backgroundColor = [UIColor colorWithRed:0 / 255.0 green:186 / 255.0 blue:242 / 255.0 alpha:1 / 1.0];
 
-        
-        // 回到首页的button
         _agreementCancelButton2 = [[UIButton alloc] initWithFrame:CGRectMake((ScreenWidth-320)/4, (ScreenHeight-180)/2+140, 160, 36)];
         [_agreementCancelButton2 addTarget:self action:@selector(agreementCancelClick:) forControlEvents:UIControlEventTouchUpInside];
      
-        
-        // 回到首页的label
         _agreementCancelLabel2 = [[UILabel alloc] init];
         _agreementCancelLabel2.frame = CGRectMake((ScreenWidth / 2)-72, (ScreenHeight-180)/2+140, 72, 18);
         _agreementCancelLabel2.text = @"取消";
         _agreementCancelLabel2.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
         _agreementCancelLabel2.textColor = [UIColor colorWithRed:102 / 255.0 green:102 / 255.0 blue:102 / 255.0 alpha:1 / 1.0];
         
-        // 重新开始采集button
             _agreementAgreeButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth/2, (ScreenHeight-180)/2+140, 160, 36)];
-    //         _agreementAgreeButton.backgroundColor = [UIColor colorWithRed:0 / 255.0 green:186 / 255.0 blue:242 / 255.0 alpha:1 / 1.0];
             [_agreementAgreeButton addTarget:self action:@selector(agreementClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            // 重新采集的文字label
             _agreementAgreeLabel = [[UILabel alloc] init];
             _agreementAgreeLabel.frame = CGRectMake((ScreenWidth / 2)+54, (ScreenHeight-180)/2+140, 72, 18);
             _agreementAgreeLabel.text = @"同意";
             _agreementAgreeLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
             _agreementAgreeLabel.textColor = [UIColor colorWithRed:0 / 255.0 green:186 / 255.0 blue:242 / 255.0 alpha:1 / 1.0];
-        
+
        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFaceCollectResult:) name:@"notification" object:nil];
-    
-    
   return self;
 }
-
 
 
 - (void)agreementViewLoad{
@@ -208,15 +175,11 @@
 }
 
 -(void)agreementInfo:(UITapGestureRecognizer *)tap{
-
-    NSLog(@"agreementInfo ====>");
     BDFaceAgreementViewController *avc = [[BDFaceAgreementViewController alloc] init];
-//    UIViewController *currentvc = self.presentingViewController;
      UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:avc];
      navi.navigationBarHidden = true;
      navi.modalPresentationStyle = UIModalPresentationFullScreen;
     [_viewController presentViewController:navi animated:YES completion:nil];
-//     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAgreeResult:) name:@"notification" object:nil];
 }
 
 -(void) agreementClick:(UITapGestureRecognizer *)tap{
@@ -235,51 +198,9 @@
     [_viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
-- (IBAction)checkAgreeClick:(UIButton *)sender {
-    sender.selected ^= 1;
-    // 如果再次点击选中button，提示窗口消失
-//    [_viewController.warningView removeFromSuperview];
-//    [_viewController.waringLabel removeFromSuperview];
-    if (sender.selected) {
-        [sender setImage:[UIImage imageNamed:@"icon_guide_s"] forState:UIControlStateSelected];
-        [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"checkAgreeBtn"];
-    } else {
-        [sender setImage:[UIImage imageNamed:@"icon_guide"] forState:UIControlStateNormal];
-        [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"checkAgreeBtn"];
-        
-    }
-}
-
-- (IBAction)agreementAction:(UILabel *)sender{
-    BDFaceAgreementViewController *avc = [[BDFaceAgreementViewController alloc] init];
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:avc];
-    navi.navigationBarHidden = true;
-    navi.modalPresentationStyle = UIModalPresentationFullScreen;
-    [_viewController presentViewController:navi animated:YES completion:nil];
-}
-
-
 #pragma mark - Button Action
 - (IBAction)startGatherAction:(UIButton *)sender{
-    // 检测是否同意，如果同意"开始人脸采集"可点击
-    NSNumber *checkAgree = [[NSUserDefaults standardUserDefaults] objectForKey:@"checkAgreeBtn"];
-//    if (!checkAgree.boolValue){
-//        [_viewController.view addSubview:self.warningView];
-//        [_viewController.view addSubview:self.waringLabel];
-//        return;
-//    }
-    // 读取设置配置，启动活体检测与否
-//    NSNumber *LiveMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"LiveMode"];
-//     NSLog(@"faceCollect LiveMode >>>>>>%@",LiveMode.description);
-//    if (LiveMode.boolValue){
-//        [self faceLiveness];
-//    } else {
-//        [self faceDetect];
-//    }
     [self agreementViewLoad];
-//     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFaceCollectResult:) name:@"notification" object:nil];
 }
 
 
@@ -299,7 +220,6 @@
 }
 
 -(void)aiFaceInit{
-    NSLog(@"aiFaceInit >>>>>>");
     [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"SoundMode"];
     [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"LiveMode"];
     [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"ByOrder"];
@@ -308,7 +228,6 @@
     [[FaceSDKManager sharedInstance] setLicenseID:FACE_LICENSE_ID andLocalLicenceFile:licensePath andRemoteAuthorize:false];
     [self initLivenesswithList];
     if ([[FaceSDKManager sharedInstance] canWork]) {
-         NSLog(@"canWork >>>>>>");
         [self initSDK];
        _result(@YES);
     }else{
@@ -328,15 +247,6 @@
     _result(nil);
 }
 -(void)faceCollect{
-    // 读取设置配置，启动活体检测与否
-//    NSNumber *LiveMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"LiveMode"];
-//      if (LiveMode.boolValue){
-//          [self faceLiveness];
-//      } else {
-//          [self faceDetect];
-//      }
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFaceCollectResult:) name:@"notification" object:nil];
     [self agreementViewLoad];
 }
 

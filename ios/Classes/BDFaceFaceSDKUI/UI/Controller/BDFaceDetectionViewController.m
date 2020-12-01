@@ -55,29 +55,6 @@ int remindCode = -1;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)agreementViewLoad{
-    // 初始化对话框
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"是否同意《人脸验证协议》？" preferredStyle:UIAlertControllerStyleAlert];
-    
-      UILabel *agreeLabel = [[UILabel alloc] init];
-      agreeLabel.frame = CGRectMake((ScreenWidth-160) / 2, 309.3, 160, 22);
-      agreeLabel.text = @"是否同意《人脸验证协议》？";
-      agreeLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
-      agreeLabel.textColor = [UIColor colorWithRed:0 / 0.0 green:0 / 0.0 blue:255 / 255.0 alpha:1 / 1.0];
-    
-    // 确定注销
-    _okAction = [UIAlertAction actionWithTitle:@"同意" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
-    }];
-    _cancelAction =[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
-        
-    }];
-    
-    [alert addAction:_okAction];
-    [alert addAction:_cancelAction];
-    // 弹出对话框
-    [self presentViewController:alert animated:true completion:nil];
-}
-
 - (void)faceProcesss:(UIImage *)image {
     if (self.hasFinished) {
         return;

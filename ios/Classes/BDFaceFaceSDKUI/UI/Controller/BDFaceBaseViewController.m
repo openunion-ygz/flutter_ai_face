@@ -49,9 +49,6 @@
 @property (nonatomic, readwrite, retain) UIButton *timeOutRestartButton2;
 @property (nonatomic, readwrite, retain) UILabel *timeOutBackToMainLabel2;
 
-
-
-
 @end
 
 @implementation BDFaceBaseViewController
@@ -270,41 +267,6 @@
     // 监听重新返回APP
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAppWillResignAction) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAppBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
-//    UIImageView* circleImage= [[UIImageView alloc]init];
-//    circleImage = [self creatRectangle:circleImage withRect:circleRect];
-//    [self.view addSubview:circleImage];
-
-//    UIImageView* previewImage= [[UIImageView alloc]init];
-//    previewImage = [self creatRectangle:previewImage withRect:self.previewRect];
-//    [self.view addSubview:previewImage];
-//
-//    UIImageView* detectImage= [[UIImageView alloc]init];
-//    detectImage = [self creatRectangle:detectImage withRect:self.detectRect];
-//    [self.view addSubview:detectImage];
-//
-//    CGRect _minRect = CGRectMake(CGRectGetMinX(self.previewRect)+115, CGRectGetMinY(self.previewRect)+115, CGRectGetWidth(self.previewRect)-230, CGRectGetHeight(self.previewRect)-230);
-//
-//    UIImageView* minImage= [[UIImageView alloc]init];
-//    minImage = [self creatRectangle:minImage withRect:_minRect];
-//    [self.view addSubview:minImage];
-    
-//      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAgreeResult:) name:@"agreeNotification" object:nil];
-}
-
--(void)handleAgreeResult:(NSNotification *)info {
-    NSString *backFromAgreement = info.userInfo[@"backFromAgreement"];
-      NSLog(@"handleAgreeResult ====>%@",backFromAgreement);
-    if ([backFromAgreement isEqualToString:@"YES"]) {
-         NSLog(@"handleAgreeResult ====>%@",@"2222");
-        self.videoCapture.runningStatus = YES;
-          NSLog(@"handleAgreeResult ====>%@",@"333");
-        [self.videoCapture startSession];
-          NSLog(@"handleAgreeResult ====>%@",@"444");
-//        [self reStart];
-        [self selfReplayFunction];
-    }
-    
 }
 #pragma mark-绘框方法
 - (UIImageView *)creatRectangle:(UIImageView *)imageView withRect:(CGRect) rect{
