@@ -31,6 +31,6 @@ A new Flutter plugin.
 
   # 引入.bundle文件
   s.ios.resources = "BDFaceSDK/*.bundle","BDFaceSDK/com.baidu.idl.face.faceSDK.bundle","BDFaceSDK/com.baidu.idl.face.live.action.image.bundle","BDFaceSDK/com.baidu.idl.face.model.faceSDK.bundle",'BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios'
-  s.resources = 'Assets/**/*',"BDFaceSDK/*.bundle","BDFaceSDK/com.baidu.idl.face.faceSDK.bundle","BDFaceSDK/com.baidu.idl.face.live.action.image.bundle","BDFaceSDK/com.baidu.idl.face.model.faceSDK.bundle",'BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios',"BDFaceSDK/{*.bundle}"
+  s.resources = 'Assets/**/*',"BDFaceSDK/*.bundle","BDFaceSDK/com.baidu.idl.face.faceSDK.bundle","BDFaceSDK/com.baidu.idl.face.live.action.image.bundle","BDFaceSDK/com.baidu.idl.face.model.faceSDK.bundle",'BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios',"BDFaceSDK/{*.bundle}","BDFaceSDK/**/*"
 
 end
