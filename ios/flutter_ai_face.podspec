@@ -30,7 +30,7 @@ A new Flutter plugin.
     s.vendored_frameworks = 'IDLFaceSDK.framework'
 
   # 引入.bundle文件
-  s.ios.resources = "BDFaceSDK/*.bundle",'BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios'
+  s.ios.resources = "BDFaceSDK/com.baidu.idl.face.faceSDK.bundle","BDFaceSDK/com.baidu.idl.face.live.action.image.bundle","BDFaceSDK/com.baidu.idl.face.model.faceSDK.bundle",'BDFaceSDK/idl-license.face-ios','BDFaceSDK/idl-key.face-ios'
   s.resources = 'Assets/**/*'
 
 end
