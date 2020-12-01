@@ -51,6 +51,7 @@
                 imageName = [NSString stringWithFormat:@"%d_%d", i, k];
             }
             NSString * path = [FACESDK_ACTION_BUNDLE pathForResource:imageName ofType:@"png"];
+            NSLog(@"path ===>%@",path);
             UIImage *image = [UIImage imageNamed:path];
             [imageArr addObject:image];
         }
