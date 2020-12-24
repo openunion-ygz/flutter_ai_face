@@ -44,7 +44,7 @@
             binaryMessenger:[registrar messenger]];
   UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;
   FlutterEventChannel *eventChannel = [FlutterEventChannel eventChannelWithName:@"aiFaceCallBackChannel" binaryMessenger:[registrar messenger]];
-    
+
 //  [eventChannel setStreamHandler:self];
     
   FlutterAiFacePlugin* instance = [[FlutterAiFacePlugin alloc] initWithViewController:viewController];

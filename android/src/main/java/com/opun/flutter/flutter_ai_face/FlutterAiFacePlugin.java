@@ -156,7 +156,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
 
     private void aiFaceInit() {
         if (mIsInitSuccess) {
-            initLicense();
+//            initLicense();
             addActionLive();
         } else {
             requestPermissions(PERMISSION_REQUEST_CODE);
@@ -347,10 +347,11 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
                 if (isAddActionHeadLeftOrRight) {
                     livenessList.add(LivenessTypeEnum.HeadLeftOrRight);
                 }
-
                 boolean isByOrder = Boolean.parseBoolean((String) mCall.argument("isByOrder"));
-                if (!isByOrder) {
-                    Collections.shuffle(livenessList);
+                if (isByOrder) {
+                    isLivenessRandom = true;
+                } else {
+                    isLivenessRandom = false;
                 }
 
             } else {
@@ -364,10 +365,13 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
                 livenessList.add(LivenessTypeEnum.HeadDown);
                 livenessList.add(LivenessTypeEnum.HeadLeftOrRight);
                 //随机排列
-                Collections.shuffle(livenessList);
+//                Collections.shuffle(livenessList);
+                isLivenessRandom = true;
 
             }
+
         }
+        initLicense();
 
     }
 
