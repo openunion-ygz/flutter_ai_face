@@ -34,11 +34,36 @@ class FlutterAiFace {
     return version;
   }
 
+  /**
+   *  人脸验证动作类型
+      LivenessTypeEnum.Eye
+      LivenessTypeEnum.Mouth
+      LivenessTypeEnum.HeadRight
+      LivenessTypeEnum.HeadLeft
+      LivenessTypeEnum.HeadUp
+      LivenessTypeEnum.HeadDown
+      LivenessTypeEnum.HeadLeftOrRight
+
+      是否按照顺序检验动作
+      isByOrder
+   */
+
   ///百度ai初始化
-  Future<bool> aiFaceInit() {
+  Future<bool> aiFaceInit(String isCustomActionLive,{String isByOrder:'false',String isAddActionTypeEye:'false',String isAddActionTypeMouth:'false',String isAddActionTypeHeadRight:'false',
+    String isAddActonTypeHeadLeft:'false',String isAddActionTypeHeadUp:'false',String isAddActionHeadDown:'false',String isAddActionHeadLeftOrRight:'false'}) {
+    Map<String, dynamic> actionTypeMap = new Map();
+    actionTypeMap['isCustomActionLive'] = isCustomActionLive;
+    actionTypeMap['isByOrder'] = isByOrder;
+    actionTypeMap['isAddActionTypeEye'] = isAddActionTypeEye;
+    actionTypeMap['isAddActionTypeMouth'] = isAddActionTypeMouth;
+    actionTypeMap['isAddActionTypeHeadRight'] = isAddActionTypeHeadRight;
+    actionTypeMap['isAddActonTypeHeadLeft'] = isAddActonTypeHeadLeft;
+    actionTypeMap['isAddActionTypeHeadUp'] = isAddActionTypeHeadUp;
+    actionTypeMap['isAddActionHeadDown'] = isAddActionHeadDown;
+    actionTypeMap['isAddActionHeadLeftOrRight'] = isAddActionHeadLeftOrRight;
     return _channel
-        .invokeMethod('aiFaceInit')
-        .then<bool>((isUnInitialize) => isUnInitialize);
+        .invokeMethod('aiFaceInit',actionTypeMap)
+        .then<bool>((isInitialize) => isInitialize);
   }
 
   ///释放资源，防止内存溢出

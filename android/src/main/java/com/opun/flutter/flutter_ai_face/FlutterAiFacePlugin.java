@@ -19,6 +19,7 @@ import com.baidu.idl.face.platform.LivenessTypeEnum;
 import com.baidu.idl.face.platform.listener.IInitCallback;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,10 +135,12 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
     }
 
     private Result mResult;
+    private MethodCall mCall;
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         mResult = result;
+        mCall = call;
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         } else if (call.method.equals("aiFaceInit")) {
@@ -180,7 +183,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
         FaceSDKManager.release();
     }
 
-    protected static void faceLiveSuccess(String faceBitmapStr){
+    protected static void faceLiveSuccess(String faceBitmapStr) {
         eventSink.success(faceBitmapStr);
     }
 
@@ -311,21 +314,68 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
     }
 
     private void addActionLive() {
-        // 根据需求添加活体动作
-        livenessList.clear();
-        livenessList.add(LivenessTypeEnum.Eye);
-        livenessList.add(LivenessTypeEnum.Mouth);
-        livenessList.add(LivenessTypeEnum.HeadRight);
-        livenessList.add(LivenessTypeEnum.HeadLeft);
-        livenessList.add(LivenessTypeEnum.HeadUp);
-        livenessList.add(LivenessTypeEnum.HeadDown);
-        livenessList.add(LivenessTypeEnum.HeadLeftOrRight);
+        if (mCall != null) {
+            //是否自定义验证动作
+            boolean isCustomActionLive = Boolean.parseBoolean((String) mCall.argument("isCustomActionLive"));
+            if (isCustomActionLive) {
+                boolean isAddActionTypeEye = Boolean.parseBoolean((String) mCall.argument("isAddActionTypeEye"));
+                boolean isAddActionTypeMouth = Boolean.parseBoolean((String) mCall.argument("isAddActionTypeMouth"));
+                boolean isAddActionTypeHeadRight = Boolean.parseBoolean((String) mCall.argument("isAddActionTypeHeadRight"));
+                boolean isAddActonTypeHeadLeft = Boolean.parseBoolean((String) mCall.argument("isAddActonTypeHeadLeft"));
+                boolean isAddActionTypeHeadUp = Boolean.parseBoolean((String) mCall.argument("isAddActionTypeHeadUp"));
+                boolean isAddActionHeadDown = Boolean.parseBoolean((String) mCall.argument("isAddActionHeadDown"));
+                boolean isAddActionHeadLeftOrRight = Boolean.parseBoolean((String) mCall.argument("isAddActionHeadLeftOrRight"));
+                livenessList.clear();
+                if (isAddActionTypeEye) {
+                    livenessList.add(LivenessTypeEnum.Eye);
+                }
+                if (isAddActionTypeMouth) {
+                    livenessList.add(LivenessTypeEnum.Mouth);
+                }
+                if (isAddActionTypeHeadRight) {
+                    livenessList.add(LivenessTypeEnum.HeadRight);
+                }
+                if (isAddActonTypeHeadLeft) {
+                    livenessList.add(LivenessTypeEnum.HeadLeft);
+                }
+                if (isAddActionTypeHeadUp) {
+                    livenessList.add(LivenessTypeEnum.HeadUp);
+                }
+                if (isAddActionHeadDown) {
+                    livenessList.add(LivenessTypeEnum.HeadDown);
+                }
+                if (isAddActionHeadLeftOrRight) {
+                    livenessList.add(LivenessTypeEnum.HeadLeftOrRight);
+                }
+
+                boolean isByOrder = Boolean.parseBoolean((String) mCall.argument("isByOrder"));
+                if (!isByOrder) {
+                    Collections.shuffle(livenessList);
+                }
+
+            } else {
+                //默认情况下没有"向左转头"动作，同时验证动作随机
+                livenessList.clear();
+                livenessList.add(LivenessTypeEnum.Eye);
+                livenessList.add(LivenessTypeEnum.Mouth);
+                livenessList.add(LivenessTypeEnum.HeadRight);
+//                livenessList.add(LivenessTypeEnum.HeadLeft);
+                livenessList.add(LivenessTypeEnum.HeadUp);
+                livenessList.add(LivenessTypeEnum.HeadDown);
+                livenessList.add(LivenessTypeEnum.HeadLeftOrRight);
+                //随机排列
+                Collections.shuffle(livenessList);
+
+            }
+        }
+
     }
 
     private static Map<String, Activity> destroyMap = new HashMap<>();
 
     /**
      * 添加到销毁队列
+     *
      * @param activity 要销毁的activity
      */
     public static void addDestroyActivity(Activity activity, String activityName) {
@@ -338,7 +388,7 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
     public static void destroyActivity(String activityName) {
         Set<String> keySet = destroyMap.keySet();
         for (String key : keySet) {
-            if (key.equals(activityName)){
+            if (key.equals(activityName)) {
                 destroyMap.get(key).finish();
             }
         }

@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await FlutterAiFace.platformVersion;
-      bool isInitSuccess = await FlutterAiFace.instance.aiFaceInit();
+      bool isInitSuccess = await FlutterAiFace.instance.aiFaceInit('true',isAddActionTypeEye: 'true',isAddActionTypeMouth: 'true',isAddActionHeadLeftOrRight: 'true');
       FlutterAiFace.aiFaceCallBackListener((faceData) {
         print('aiFaceCallBackListener ===>$faceData');
         setState(() {
