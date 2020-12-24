@@ -44,6 +44,10 @@ https://github.com/openunion-ygz/flutter_ai_face.git
 ios中，idl-license.face-ios及idl-key.face-ios文件必须在xcode中通过 "Add File to Runner"方式添加文件的形式，
 将文件放在主工程的 ios/Runner目录下，否则无法找到证书文件
 
+#关于SDFaceSDK文件的引入说明（IOS）：
+
+
+
 
 4.其它：
 
