@@ -65,18 +65,18 @@
   }
        
        // 开始采集的Button
-       UIButton *startBtn  = [[UIButton alloc] init];
-       startBtn.frame = CGRectMake((_viewController.view.frame.size.width)/2, 478, 266.7, 52);
-       [startBtn setImage:[UIImage imageNamed:@"btn_main_normal"] forState:UIControlStateNormal];
-       [startBtn setImage:[UIImage imageNamed:@"btn_main_p"] forState:UIControlStateSelected];
-       UILabel *btnLabel = [[UILabel alloc] init];
-       btnLabel.frame = CGRectMake((_viewController.view.frame.size.width)/2, 495, 108, 18);
-       btnLabel.text = @"开始人脸采集";
-       btnLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
-       btnLabel.textColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:1 / 1.0];
-       [_viewController.view addSubview:startBtn];
-       [_viewController.view addSubview:btnLabel];
-       [startBtn addTarget:self action:@selector(startGatherAction:) forControlEvents:UIControlEventTouchUpInside];
+//       UIButton *startBtn  = [[UIButton alloc] init];
+//       startBtn.frame = CGRectMake((_viewController.view.frame.size.width)/2, 478, 266.7, 52);
+//       [startBtn setImage:[UIImage imageNamed:@"btn_main_normal"] forState:UIControlStateNormal];
+//       [startBtn setImage:[UIImage imageNamed:@"btn_main_p"] forState:UIControlStateSelected];
+//       UILabel *btnLabel = [[UILabel alloc] init];
+//       btnLabel.frame = CGRectMake((_viewController.view.frame.size.width)/2, 495, 108, 18);
+//       btnLabel.text = @"开始人脸采集";
+//       btnLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
+//       btnLabel.textColor = [UIColor colorWithRed:0 / 255.0 green:0 / 255.0 blue:0 / 255.0 alpha:1 / 1.0];
+//       [_viewController.view addSubview:startBtn];
+//       [_viewController.view addSubview:btnLabel];
+//       [startBtn addTarget:self action:@selector(startGatherAction:) forControlEvents:UIControlEventTouchUpInside];
        
            // 超时的最底层view，大小和屏幕大小一致，为了突出弹窗的view的效果，背景为灰色，0.7的透视度
         _agreementMainView = [[UIView alloc] init];
