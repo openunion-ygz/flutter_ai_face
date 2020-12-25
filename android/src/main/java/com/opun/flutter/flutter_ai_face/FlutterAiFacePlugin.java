@@ -349,9 +349,9 @@ public class FlutterAiFacePlugin implements FlutterPlugin, MethodCallHandler, Ac
                 }
                 boolean isByOrder = Boolean.parseBoolean((String) mCall.argument("isByOrder"));
                 if (isByOrder) {
-                    isLivenessRandom = true;
-                } else {
                     isLivenessRandom = false;
+                } else {
+                    isLivenessRandom = true;
                 }
 
             } else {

@@ -13,7 +13,35 @@ https://github.com/openunion-ygz/flutter_ai_face.git
 
 （1）aiFaceInit
 
-    进行资源的初始化，必要权限的申请，百度人脸ai证书的认证等。该方法必须首先调用并且初始化成功，否则其它功能无法使用。
+方法：
+  Future<bool> aiFaceInit(String isCustomActionLive,{String isByOrder:'false',String isAddActionTypeEye:'false',String isAddActionTypeMouth:'false',String isAddActionTypeHeadRight:'false',
+    String isAddActonTypeHeadLeft:'false',String isAddActionTypeHeadUp:'false',String isAddActionHeadDown:'false',String isAddActionHeadLeftOrRight:'false'})
+
+    进行资源的初始化，必要权限的申请，百度人脸ai证书的认证以及人脸验证动作的定义等。该方法必须首先调用并且初始化成功，否则其它功能无法使用。另外，
+
+    关于自定义人脸验证动作的说明：
+
+    根据用户需求，可以使用默认的人脸验证动作：包含6个动作，同时动作随机，分别为：
+
+    LivenessTypeEnum.Eye
+    LivenessTypeEnum.Mouth
+    LivenessTypeEnum.HeadRight
+    //LivenessTypeEnum.HeadLeft
+    LivenessTypeEnum.HeadUp
+    LivenessTypeEnum.HeadDown
+    LivenessTypeEnum.HeadLeftOrRight
+
+    此时，调用的方式为：aiFaceInit('false');
+
+    若用户需要自定义验证动作，则在对应的动作参数中定义布尔值即可，如：用户需要定义 Eye，HeadLeftOrRight，Mouth三个动作，则
+
+    调用的方法为：
+
+     FlutterAiFace.instance.aiFaceInit('true',isAddActionTypeEye: 'true',isAddActionHeadLeftOrRight: 'true',
+                              isAddActionTypeMouth: 'true');
+
+     同时，可以通过“isByOrder”指定是否随机（用户自定义动作情况下，默认为随机动作）
+
 
 （2）faceCollect
 
@@ -44,9 +72,11 @@ https://github.com/openunion-ygz/flutter_ai_face.git
 ios中，idl-license.face-ios及idl-key.face-ios文件必须在xcode中通过 "Add File to Runner"方式添加文件的形式，
 将文件放在主工程的 ios/Runner目录下，否则无法找到证书文件
 
-#关于SDFaceSDK文件的引入说明（IOS）：
+#关于需要在主工程中引入资源文件的引入说明（IOS）：
 
+在主工程中，需要将解压的百度官网下载文件“FaceSDKSample_IOS\FaceSDKSample_IOS\Assets.xcassets”文件
 
+除“AppIcon.appiconset”，“AppIcon.appiconset”之外的资源文件添加到主工程“ios/Runner/Assets.xcassets”目录下。
 
 
 4.其它：
